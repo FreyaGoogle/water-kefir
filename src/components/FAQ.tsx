@@ -37,7 +37,7 @@ const FAQ_ITEMS: FAQItem[] = [
   {
     question: 'Welk water gebruik ik het best?',
     answer:
-      'Gebruik gefilterd water of bronwater. Leidingwater kan chloor bevatten dat de korrels schaadt. Als je leidingwater gebruikt, laat het dan eerst 30 minuten staan om het chloor te laten verdampen.',
+      'Nederlands leidingwater is prima geschikt — het bevat geen chloor en werkt goed voor water kefir. In andere landen kan leidingwater wél chloor bevatten; gebruik dan gefilterd of bronwater, of laat het water eerst even staan.',
   },
 ];
 
