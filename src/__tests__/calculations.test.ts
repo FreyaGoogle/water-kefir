@@ -2,12 +2,12 @@ import { describe, it, expect } from 'vitest';
 import { calcIngredients, formatIngredients } from '../utils/calculations';
 
 describe('calcIngredients', () => {
-  it('calcIngredients(50) → water=500, suiker=25, abrik=2.5, citroen=2.5', () => {
+  it('calcIngredients(50) → water=500, suiker=25, abrik=12.5, citroen=22.5', () => {
     const result = calcIngredients(50);
     expect(result.water).toBe(500);
     expect(result.suiker).toBe(25);
-    expect(result.abrikozen).toBe(2.5);
-    expect(result.citroen).toBe(2.5);
+    expect(result.abrikozen).toBe(12.5);
+    expect(result.citroen).toBe(22.5);
   });
 
   it('verhouding water ×10 voor 20g', () => {
@@ -42,20 +42,20 @@ describe('calcIngredients', () => {
     expect(calcIngredients(100).suiker).toBe(50);
   });
 
-  it('verhouding abrikozen ×0.05 voor 50g', () => {
-    expect(calcIngredients(50).abrikozen).toBe(2.5);
+  it('verhouding abrikozen ×0.25 voor 50g', () => {
+    expect(calcIngredients(50).abrikozen).toBe(12.5);
   });
 
-  it('verhouding citroen ×0.05 voor 50g', () => {
-    expect(calcIngredients(50).citroen).toBe(2.5);
+  it('verhouding citroen ×0.45 voor 50g', () => {
+    expect(calcIngredients(50).citroen).toBe(22.5);
   });
 
-  it('verhouding abrikozen ×0.05 voor 100g', () => {
-    expect(calcIngredients(100).abrikozen).toBe(5);
+  it('verhouding abrikozen ×0.25 voor 100g → 25g (≈3 abrikozen)', () => {
+    expect(calcIngredients(100).abrikozen).toBe(25);
   });
 
-  it('verhouding citroen ×0.05 voor 100g', () => {
-    expect(calcIngredients(100).citroen).toBe(5);
+  it('verhouding citroen ×0.45 voor 100g → 45g (≈3 schijfjes)', () => {
+    expect(calcIngredients(100).citroen).toBe(45);
   });
 });
 

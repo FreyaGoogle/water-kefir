@@ -12,7 +12,7 @@ const FRUIT_OPTIONS: { value: GedroogdFruitType; label: string }[] = [
 ];
 
 export function F1() {
-  const [grams, setGrams] = useState<number>(50);
+  const [grams, setGrams] = useState<number | null>(null);
   const [fruitType, setFruitType] = useState<GedroogdFruitType>('abrikozen');
 
   useEffect(() => {
@@ -21,12 +21,13 @@ export function F1() {
     if (data?.gedroogdFruit) setFruitType(data.gedroogdFruit);
   }, []);
 
-  const ingredients = calcIngredients(grams);
-  const formatted = formatIngredients(ingredients, fruitType);
+  const ingredients = grams ? calcIngredients(grams) : null;
+  const formatted = ingredients ? formatIngredients(ingredients, fruitType) : null;
 
-  function handleGramsChange(value: number) {
-    setGrams(value);
-    saveData({ gramsKefir: value });
+  function handleGramsChange(value: string) {
+    const num = value === '' ? null : Number(value);
+    setGrams(num);
+    if (num) saveData({ gramsKefir: num });
   }
 
   function handleFruitChange(value: GedroogdFruitType) {
@@ -48,8 +49,9 @@ export function F1() {
           type="number"
           min={10}
           max={500}
-          value={grams}
-          onChange={(e) => handleGramsChange(Number(e.target.value))}
+          value={grams ?? ''}
+          placeholder="bijv. 50"
+          onChange={(e) => handleGramsChange(e.target.value)}
         />
       </div>
 
@@ -69,35 +71,46 @@ export function F1() {
       </div>
 
       <h3>Ingrediënten voor F1</h3>
-      <table className="ingredients-table">
-        <thead>
-          <tr>
-            <th>Ingredient</th>
-            <th>Hoeveelheid</th>
-          </tr>
-        </thead>
-        <tbody>
-          {formatted.map((ing) => (
-            <tr key={ing.label}>
-              <td>{ing.label}</td>
-              <td>
-                {ing.value} {ing.unit}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {formatted ? (
+        <>
+          <table className="ingredients-table">
+            <thead>
+              <tr>
+                <th>Ingredient</th>
+                <th>Hoeveelheid</th>
+              </tr>
+            </thead>
+            <tbody>
+              {formatted.map((ing) => (
+                <tr key={ing.label}>
+                  <td>{ing.label}</td>
+                  <td>
+                    {ing.value} {ing.unit}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <p className="smaak-notitie">
+            <em>De hoeveelheden gedroogd fruit en citroen zijn richtlijnen — pas gerust aan naar eigen smaak.</em>
+          </p>
+        </>
+      ) : (
+        <p className="placeholder-tekst">Voer het gewicht van je kefirkorrels in om de ingrediënten te zien.</p>
+      )}
 
-      <div className="info-box">
-        <strong>Werkwijze F1:</strong>
-        <ol>
-          <li>Los de suiker op in lauwwarm water.</li>
-          <li>Laat afkoelen tot kamertemperatuur.</li>
-          <li>Voeg kefirkorrels, {fruitConfig.label.toLowerCase()} en citroen toe.</li>
-          <li>Dek af met een doek en laat 24-48 uur fermenteren.</li>
-          <li>Zeef de korrels en bewaar de kefir voor F2.</li>
-        </ol>
-      </div>
+      {formatted && (
+        <div className="info-box">
+          <strong>Werkwijze F1:</strong>
+          <ol>
+            <li>Los de suiker op in lauwwarm water.</li>
+            <li>Laat afkoelen tot kamertemperatuur.</li>
+            <li>Voeg kefirkorrels, {fruitConfig.label.toLowerCase()} en citroen toe.</li>
+            <li>Dek af met een doek en laat 24-48 uur fermenteren.</li>
+            <li>Zeef de korrels en bewaar de kefir voor F2.</li>
+          </ol>
+        </div>
+      )}
     </div>
   );
 }

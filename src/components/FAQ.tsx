@@ -20,9 +20,9 @@ const FAQ_ITEMS: FAQItem[] = [
       'Mogelijke oorzaken: te koude omgeving (ideaal: 20-25°C), te weinig suiker, korrels in slechte conditie, of te korte F2 tijd. Probeer de fles langer op kamertemperatuur te laten staan en zorg voor een constante temperatuur.',
   },
   {
-    question: 'Hoeveel water kefir mag ik per dag drinken?',
+    question: 'Hoeveel water kefir kan ik per dag drinken?',
     answer:
-      'Begin met een klein glaasje (100-150 ml) per dag om je darmen te laten wennen. Daarna kun je opbouwen naar 250-500 ml per dag. Luister naar je lichaam.',
+      'Dit verschilt sterk per persoon. Begin met een kleine hoeveelheid — zoals een half glaasje — en kijk hoe je lichaam reageert. De meeste mensen bouwen dit geleidelijk op naar wat voor hen goed voelt. Sommigen drinken dagelijks 250-500 ml zonder problemen, anderen houden het bij minder. Er is geen vaste grens: luister naar je eigen lichaam.',
   },
   {
     question: 'Kunnen mijn korrels groeien?',

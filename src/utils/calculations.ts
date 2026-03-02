@@ -10,12 +10,14 @@ export const GEDROOGD_FRUIT_CONFIG: Record<GedroogdFruitType, { label: string; g
 
 const GRAM_PER_SCHIJFJE_CITROEN = 15;
 
+// Gedroogd fruit: ca. 2-3 abrikozen per liter water (bron: standaard water kefir recepten)
+// Citroen: ca. 3 schijfjes per 100g korrels
 export function calcIngredients(gramsKefir: number): Ingredients {
   return {
     water: gramsKefir * 10,
     suiker: gramsKefir * 0.5,
-    abrikozen: gramsKefir * 0.05,
-    citroen: gramsKefir * 0.05,
+    abrikozen: gramsKefir * 0.25,
+    citroen: gramsKefir * 0.45,
   };
 }
 
