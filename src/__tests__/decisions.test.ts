@@ -82,13 +82,18 @@ describe('getPressureWarning', () => {
     expect(warning).not.toBeNull();
   });
 
-  it('waarschuwing bij 48u ongeacht smaakstof', () => {
+  it('null bij neutraal + 48u (geen snelle gisting)', () => {
     const warning = getPressureWarning(['neutraal'], 48);
-    expect(warning).not.toBeNull();
+    expect(warning).toBeNull();
   });
 
-  it('waarschuwing bij citrus + 48u', () => {
+  it('null bij citrus + 48u (geen snelle gisting)', () => {
     const warning = getPressureWarning(['citrus'], 48);
+    expect(warning).toBeNull();
+  });
+
+  it('waarschuwing bij gember + 48u', () => {
+    const warning = getPressureWarning(['gember'], 48);
     expect(warning).not.toBeNull();
   });
 

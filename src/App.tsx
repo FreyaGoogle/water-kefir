@@ -4,9 +4,10 @@ import { F2 } from './components/F2';
 import { Planner } from './components/Planner';
 import { Check } from './components/Check';
 import { FAQ } from './components/FAQ';
+import { Tips } from './components/Tips';
 import './App.css';
 
-type Tab = 'f1' | 'f2' | 'planner' | 'check' | 'faq';
+type Tab = 'f1' | 'f2' | 'planner' | 'check' | 'faq' | 'tips';
 
 const TABS: { id: Tab; label: string }[] = [
   { id: 'f1', label: 'F1' },
@@ -14,6 +15,7 @@ const TABS: { id: Tab; label: string }[] = [
   { id: 'planner', label: 'Planner' },
   { id: 'check', label: 'Check' },
   { id: 'faq', label: 'FAQ' },
+  { id: 'tips', label: 'Tips' },
 ];
 
 function App() {
@@ -44,6 +46,7 @@ function App() {
         {activeTab === 'planner' && <Planner />}
         {activeTab === 'check' && <Check />}
         {activeTab === 'faq' && <FAQ />}
+        {activeTab === 'tips' && <Tips />}
       </main>
 
       <footer className="app-footer">
