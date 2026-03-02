@@ -72,12 +72,18 @@ export function getMoldWarning(answers: string[]): string | null {
   return null;
 }
 
-export function getPressureWarning(smaakstof: Smaakstof, hours: number): string | null {
+const SNELLE_GISTING_SOORTEN: Smaakstof[] = [
+  'gember', 'rood_fruit', 'aardbei', 'framboos', 'mango', 'ananas',
+];
+
+export function getPressureWarning(smaakstoffen: Smaakstof[], hours: number): string | null {
   if (hours >= 48) {
     return 'Waarschuwing: bij 48 uur of langer bestaat er een risico op overdruk in de fles. Ontlucht voorzichtig of gebruik een drukbestendige fles.';
   }
-  if ((smaakstof === 'gember' || smaakstof === 'rood_fruit') && hours >= 24) {
-    return `Waarschuwing: ${smaakstof === 'gember' ? 'gember' : 'rood fruit'} versnelt de gisting aanzienlijk. Bij ${hours} uur F2 kan er overdruk ontstaan. Controleer de druk regelmatig.`;
+  const snelleActief = smaakstoffen.filter((s) => SNELLE_GISTING_SOORTEN.includes(s));
+  if (snelleActief.length > 0 && hours >= 24) {
+    const namen = snelleActief.join(', ').replace(/_/g, ' ');
+    return `Waarschuwing: ${namen} versnelt de gisting aanzienlijk. Bij ${hours} uur F2 kan er overdruk ontstaan. Controleer de druk regelmatig.`;
   }
   return null;
 }

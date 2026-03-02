@@ -1,26 +1,82 @@
 import { useState, useEffect } from 'react';
 import { getPressureWarning } from '../utils/decisions';
-import { getRecipe } from '../utils/bottleRecipes';
+import { getRecipes } from '../utils/bottleRecipes';
 import { saveData, loadData } from '../utils/storage';
 import type { Smaakstof } from '../types';
 
-const SMAAKSTOF_OPTIONS: { value: Smaakstof; label: string }[] = [
-  { value: 'neutraal', label: 'Naturel' },
-  { value: 'gember', label: 'Gember' },
-  { value: 'rood_fruit', label: 'Rood Fruit' },
-  { value: 'citrus', label: 'Citrus' },
+interface SmaakstofGroep {
+  label: string;
+  opties: { value: Smaakstof; label: string }[];
+}
+
+const SMAAKSTOF_GROEPEN: SmaakstofGroep[] = [
+  {
+    label: 'Neutraal',
+    opties: [
+      { value: 'neutraal', label: 'Naturel' },
+    ],
+  },
+  {
+    label: 'Rood fruit & bessen',
+    opties: [
+      { value: 'rood_fruit',    label: 'Rood Fruit (mix)' },
+      { value: 'aardbei',       label: 'Aardbei' },
+      { value: 'framboos',      label: 'Framboos' },
+      { value: 'blauwe_bes',    label: 'Blauwe bes' },
+      { value: 'granaatappel',  label: 'Granaatappel' },
+    ],
+  },
+  {
+    label: 'Tropisch fruit',
+    opties: [
+      { value: 'mango',         label: 'Mango' },
+      { value: 'ananas',        label: 'Ananas' },
+      { value: 'passievrucht',  label: 'Passievrucht' },
+    ],
+  },
+  {
+    label: 'Citrus',
+    opties: [
+      { value: 'citrus',        label: 'Citrus (mix)' },
+      { value: 'limoen',        label: 'Limoen' },
+    ],
+  },
+  {
+    label: 'Mild fruit',
+    opties: [
+      { value: 'peer',          label: 'Peer' },
+    ],
+  },
+  {
+    label: 'Kruiden & bloemen',
+    opties: [
+      { value: 'gember',        label: 'Gember' },
+      { value: 'munt',          label: 'Munt' },
+      { value: 'vlierbloesem',  label: 'Vlierbloesem' },
+      { value: 'hibiscus',      label: 'Hibiscus' },
+      { value: 'vanille',       label: 'Vanille' },
+    ],
+  },
 ];
 
 const HOURS_OPTIONS = [12, 24, 36, 48];
 
+function parseSavedSmaakstof(raw: Smaakstof | Smaakstof[] | undefined): Smaakstof[] {
+  if (!raw) return ['neutraal'];
+  if (Array.isArray(raw)) return raw.length > 0 ? raw : ['neutraal'];
+  return [raw];
+}
+
 export function F2() {
   const [hours, setHours] = useState<number>(24);
-  const [smaakstof, setSmaakstof] = useState<Smaakstof>('neutraal');
+  const [smaakstoffen, setSmaakstoffen] = useState<Smaakstof[]>(['neutraal']);
 
   useEffect(() => {
     const data = loadData();
     if (data?.f2Hours) setHours(data.f2Hours);
-    if (data?.smaakstof) setSmaakstof(data.smaakstof);
+    if (data?.smaakstof !== undefined) {
+      setSmaakstoffen(parseSavedSmaakstof(data.smaakstof));
+    }
   }, []);
 
   function handleHoursChange(value: number) {
@@ -28,13 +84,28 @@ export function F2() {
     saveData({ f2Hours: value });
   }
 
-  function handleSmaakstofChange(value: Smaakstof) {
-    setSmaakstof(value);
-    saveData({ smaakstof: value });
+  function handleToggle(waarde: Smaakstof) {
+    setSmaakstoffen((prev) => {
+      let nieuw: Smaakstof[];
+      if (waarde === 'neutraal') {
+        nieuw = ['neutraal'];
+      } else if (prev.includes(waarde)) {
+        nieuw = prev.filter((s) => s !== waarde);
+        if (nieuw.length === 0) nieuw = ['neutraal'];
+      } else {
+        nieuw = [...prev.filter((s) => s !== 'neutraal'), waarde];
+      }
+      saveData({ smaakstof: nieuw });
+      return nieuw;
+    });
   }
 
-  const pressureWarning = getPressureWarning(smaakstof, hours);
-  const recipe = getRecipe(smaakstof);
+  const pressureWarning = getPressureWarning(smaakstoffen, hours);
+  const recepten = getRecipes(smaakstoffen);
+
+  const gecombineerdeIngredienten = recepten.length > 0
+    ? Array.from(new Set(recepten.flatMap((r) => r.ingredienten)))
+    : ['Water kefir (na F1)'];
 
   return (
     <div className="card">
@@ -42,18 +113,26 @@ export function F2() {
       <p>Geef je kefir smaak en bruising in een afgesloten fles.</p>
 
       <div className="form-group">
-        <label htmlFor="smaakstof">Smaakstof:</label>
-        <select
-          id="smaakstof"
-          value={smaakstof}
-          onChange={(e) => handleSmaakstofChange(e.target.value as Smaakstof)}
-        >
-          {SMAAKSTOF_OPTIONS.map((opt) => (
-            <option key={opt.value} value={opt.value}>
-              {opt.label}
-            </option>
+        <label>Smaakstof (meerdere mogelijk):</label>
+        <div className="smaakstof-groepen">
+          {SMAAKSTOF_GROEPEN.map((groep) => (
+            <div key={groep.label} className="smaakstof-groep">
+              <strong className="groep-label">{groep.label}</strong>
+              <div className="smaakstof-opties">
+                {groep.opties.map((opt) => (
+                  <label key={opt.value} className="checkbox-label">
+                    <input
+                      type="checkbox"
+                      checked={smaakstoffen.includes(opt.value)}
+                      onChange={() => handleToggle(opt.value)}
+                    />
+                    {opt.label}
+                  </label>
+                ))}
+              </div>
+            </div>
           ))}
-        </select>
+        </div>
       </div>
 
       <div className="form-group">
@@ -77,19 +156,23 @@ export function F2() {
         </div>
       )}
 
-      {recipe && (
-        <div className="recipe-box">
-          <h3>Recept: {recipe.label}</h3>
-          <ul>
-            {recipe.ingredienten.map((ing, i) => (
-              <li key={i}>{ing}</li>
-            ))}
-          </ul>
-          <p>
-            <em>Tip: {recipe.tip}</em>
+      <div className="recipe-box">
+        <h3>
+          {smaakstoffen.includes('neutraal') && smaakstoffen.length === 1
+            ? 'Recept: Naturel'
+            : `Recept: ${recepten.map((r) => r.label).join(' + ')}`}
+        </h3>
+        <ul>
+          {gecombineerdeIngredienten.map((ing, i) => (
+            <li key={i}>{ing}</li>
+          ))}
+        </ul>
+        {recepten.map((r) => (
+          <p key={r.smaakstof}>
+            <em>Tip ({r.label}): {r.tip}</em>
           </p>
-        </div>
-      )}
+        ))}
+      </div>
 
       <div className="info-box">
         <strong>Werkwijze F2:</strong>

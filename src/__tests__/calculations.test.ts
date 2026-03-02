@@ -67,7 +67,7 @@ describe('formatIngredients', () => {
     expect(labels).toContain('Water');
     expect(labels).toContain('Suiker');
     expect(labels).toContain('Gedroogde abrikozen');
-    expect(labels).toContain('Citroen (schijfje)');
+    expect(labels).toContain('Citroen');
   });
 
   it('formatIngredients bevat alle waarden', () => {
@@ -80,5 +80,35 @@ describe('formatIngredients', () => {
   it('formatIngredients geeft 4 ingrediënten terug', () => {
     const formatted = formatIngredients(calcIngredients(50));
     expect(formatted).toHaveLength(4);
+  });
+
+  it('fruit toont in stuks', () => {
+    const formatted = formatIngredients(calcIngredients(50));
+    const fruit = formatted.find((f) => f.label === 'Gedroogde abrikozen');
+    expect(fruit?.unit).toBe('stuks');
+  });
+
+  it('citroen toont in schijfjes', () => {
+    const formatted = formatIngredients(calcIngredients(50));
+    const citroen = formatted.find((f) => f.label === 'Citroen');
+    expect(citroen?.unit).toBe('schijfjes');
+  });
+
+  it('dadels als fruittype geeft eigen label', () => {
+    const formatted = formatIngredients(calcIngredients(50), 'dadels');
+    const labels = formatted.map((f) => f.label);
+    expect(labels).toContain('Dadels');
+  });
+
+  it('minimum 1 stuk fruit ook bij kleine hoeveelheid', () => {
+    const formatted = formatIngredients(calcIngredients(10));
+    const fruit = formatted.find((f) => f.label === 'Gedroogde abrikozen');
+    expect(fruit?.value).toBeGreaterThanOrEqual(1);
+  });
+
+  it('minimum 1 schijfje citroen ook bij kleine hoeveelheid', () => {
+    const formatted = formatIngredients(calcIngredients(10));
+    const citroen = formatted.find((f) => f.label === 'Citroen');
+    expect(citroen?.value).toBeGreaterThanOrEqual(1);
   });
 });

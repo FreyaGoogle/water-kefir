@@ -5,6 +5,8 @@ export interface Ingredients {
   citroen: number;
 }
 
+export type GedroogdFruitType = 'abrikozen' | 'dadels' | 'rozijnen' | 'vijgen' | 'pruimen';
+
 export interface PlannerAction {
   id: string;
   label: string;
@@ -24,12 +26,30 @@ export interface CheckQuestion {
 
 export type CheckResult = 'groen' | 'oranje' | 'rood';
 
-export type Smaakstof = 'neutraal' | 'gember' | 'rood_fruit' | 'citrus';
+export type Smaakstof =
+  | 'neutraal'
+  | 'gember'
+  | 'rood_fruit'
+  | 'citrus'
+  | 'aardbei'
+  | 'framboos'
+  | 'blauwe_bes'
+  | 'granaatappel'
+  | 'mango'
+  | 'ananas'
+  | 'passievrucht'
+  | 'limoen'
+  | 'peer'
+  | 'vlierbloesem'
+  | 'munt'
+  | 'hibiscus'
+  | 'vanille';
 
 export interface StorageData {
   gramsKefir: number;
   f2Hours: number;
-  smaakstof: Smaakstof;
+  smaakstof: Smaakstof | Smaakstof[];
+  gedroogdFruit: GedroogdFruitType;
   plannerStartDate: string;
   plannerStartTime: string;
   checkAnswers: Record<string, string>;
@@ -41,4 +61,5 @@ export interface BottleRecipe {
   label: string;
   ingredienten: string[];
   tip: string;
+  snelleGisting?: boolean;
 }

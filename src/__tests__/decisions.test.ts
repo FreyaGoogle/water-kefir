@@ -73,42 +73,57 @@ describe('getMoldWarning', () => {
 
 describe('getPressureWarning', () => {
   it('waarschuwing bij gember + 24u', () => {
-    const warning = getPressureWarning('gember', 24);
+    const warning = getPressureWarning(['gember'], 24);
     expect(warning).not.toBeNull();
   });
 
   it('waarschuwing bij rood_fruit + 24u', () => {
-    const warning = getPressureWarning('rood_fruit', 24);
+    const warning = getPressureWarning(['rood_fruit'], 24);
     expect(warning).not.toBeNull();
   });
 
   it('waarschuwing bij 48u ongeacht smaakstof', () => {
-    const warning = getPressureWarning('neutraal', 48);
+    const warning = getPressureWarning(['neutraal'], 48);
     expect(warning).not.toBeNull();
   });
 
   it('waarschuwing bij citrus + 48u', () => {
-    const warning = getPressureWarning('citrus', 48);
+    const warning = getPressureWarning(['citrus'], 48);
     expect(warning).not.toBeNull();
   });
 
   it('null bij neutraal + 12u', () => {
-    const warning = getPressureWarning('neutraal', 12);
+    const warning = getPressureWarning(['neutraal'], 12);
     expect(warning).toBeNull();
   });
 
   it('null bij citrus + 12u', () => {
-    const warning = getPressureWarning('citrus', 12);
+    const warning = getPressureWarning(['citrus'], 12);
     expect(warning).toBeNull();
   });
 
   it('null bij citrus + 24u', () => {
-    const warning = getPressureWarning('citrus', 24);
+    const warning = getPressureWarning(['citrus'], 24);
     expect(warning).toBeNull();
   });
 
   it('null bij neutraal + 24u', () => {
-    const warning = getPressureWarning('neutraal', 24);
+    const warning = getPressureWarning(['neutraal'], 24);
     expect(warning).toBeNull();
+  });
+
+  it('waarschuwing bij combinatie gember + citrus + 24u', () => {
+    const warning = getPressureWarning(['gember', 'citrus'], 24);
+    expect(warning).not.toBeNull();
+  });
+
+  it('waarschuwing bij mango + 24u', () => {
+    const warning = getPressureWarning(['mango'], 24);
+    expect(warning).not.toBeNull();
+  });
+
+  it('waarschuwing bij ananas + 24u', () => {
+    const warning = getPressureWarning(['ananas'], 24);
+    expect(warning).not.toBeNull();
   });
 });
