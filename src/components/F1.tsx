@@ -103,10 +103,9 @@ export function F1() {
         <div className="info-box">
           <strong>Werkwijze F1:</strong>
           <ol>
-            <li>Los de suiker op in lauwwarm water.</li>
-            <li>Laat afkoelen tot kamertemperatuur.</li>
-            <li>Voeg kefirkorrels, {fruitConfig.label.toLowerCase()} en citroen toe.</li>
-            <li>Dek af met een doek en laat 24-48 uur fermenteren.</li>
+            <li>Doe water, suiker, {fruitConfig.label.toLowerCase()} en citroen in een pot. Roer kort door — de suiker lost ook op zonder verwarmen.</li>
+            <li>Voeg de kefirkorrels toe.</li>
+            <li>Dek af met een doek en laat 24-48 uur fermenteren op kamertemperatuur.</li>
             <li>Zeef de korrels en bewaar de kefir voor F2.</li>
           </ol>
         </div>

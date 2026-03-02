@@ -12,7 +12,7 @@ const FAQ_ITEMS: FAQItem[] = [
   {
     question: 'Hoe bewaar ik mijn kefirkorrels als ik even stop?',
     answer:
-      'Leg de korrels in een pot met suikerwater (1 el suiker per 250 ml water), sluit af en bewaar in de koelkast. Zo blijven ze tot 2 weken goed. Ververs het suikerwater wekelijks.',
+      'Dit hangt af van hoe lang je wilt pauzeren. Voor een korte pauze (tot 6 maanden): leg de korrels in suikerwater en bewaar in de koelkast. De meeste mensen ververs het suikerwater wekelijks, maar er zijn ook ervaringen waarbij korrels jarenlang in de koelkast overleven. Voor langdurige bewaring zijn de meningen verdeeld. Invriezen kan — droog de korrels eerst goed af — maar er bestaat kans op structuurschade aan de korrels. Drogen wordt door veel mensen als de meest betrouwbare methode gezien: laat de korrels 3-5 dagen drogen op kamertemperatuur en bewaar ze daarna droog in de koelkast (3-6 maanden) of vriezer (tot een jaar). Na opslag kunnen korrels 1-2 weken nodig hebben om weer op gang te komen.',
   },
   {
     question: 'Mijn kefir is niet bruisend. Wat doe ik fout?',
