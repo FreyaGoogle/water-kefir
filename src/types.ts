@@ -26,13 +26,12 @@ export type CheckResult = 'groen' | 'oranje' | 'rood';
 
 export type Smaakstof = 'neutraal' | 'gember' | 'rood_fruit' | 'citrus';
 
-export type Tijdvoorkeur = 'ochtend' | 'avond';
-
 export interface StorageData {
   gramsKefir: number;
   f2Hours: number;
   smaakstof: Smaakstof;
-  tijdvoorkeur: Tijdvoorkeur;
+  plannerStartDate: string;
+  plannerStartTime: string;
   checkAnswers: Record<string, string>;
   plannerActions: PlannerAction[];
 }
