@@ -45,11 +45,10 @@ export function generateMoments(startDate: Date, f2Hours: number): PlannerMoment
       title: 'Overgang: F1 → F2',
       icon: '🔄',
       steps: [
-        step('Haal de vorige F2-fles(sen) uit de koelkast — klaar om te drinken!'),
-        step('Was de F2-fles(sen) schoon en laat afdruipen'),
+        step('Was de F2-fles(sen) schoon en laat afdruipen (de vorige batch drink je gewoon op wanneer je wilt)'),
         step('Zeef de F1: houd een fijnmazige zeef boven de schone fles of maatbeker'),
         step('Schep de kefirkorrels uit de zeef en bewaar ze in een bakje'),
-        step('Gooi het gedroogd fruit en de citroen weg'),
+        step('Gooi het gedroogd fruit en de citroen weg (of op de composthoop/GFT)'),
         step('Vul de F2-fles met de gezeefd kefir'),
         step('Voeg de smaakstof toe (vers fruit, gembersap, limoensap...)'),
         step('Sluit de F2-fles goed af met de beugelsluiting'),
