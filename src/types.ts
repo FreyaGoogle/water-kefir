@@ -14,6 +14,20 @@ export interface PlannerAction {
   done: boolean;
 }
 
+export interface PlannerStep {
+  id: string;
+  label: string;
+  done: boolean;
+}
+
+export interface PlannerMoment {
+  id: string;
+  time: string;
+  title: string;
+  icon: string;
+  steps: PlannerStep[];
+}
+
 export interface CheckQuestion {
   id: string;
   text: string;
@@ -54,6 +68,7 @@ export interface StorageData {
   plannerStartTime: string;
   checkAnswers: Record<string, string>;
   plannerActions: PlannerAction[];
+  plannerMoments: PlannerMoment[];
 }
 
 export interface BottleRecipe {

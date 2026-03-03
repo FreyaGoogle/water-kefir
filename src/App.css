@@ -343,6 +343,166 @@ body {
   margin-top: 2rem;
 }
 
+/* ── Planner ──────────────────────────────────────────── */
+
+.planner-inputs {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.planner-f2-note {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-top: -0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.planner-progress-bar-wrap {
+  position: relative;
+  background: var(--border);
+  border-radius: 99px;
+  height: 10px;
+  margin: 1rem 0 0.25rem;
+  overflow: hidden;
+}
+
+.planner-progress-bar {
+  background: var(--success);
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.3s ease;
+}
+
+.planner-progress-label {
+  display: block;
+  text-align: right;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.planner-moments {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.moment-card {
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--primary);
+  border-radius: var(--radius);
+  padding: 1rem;
+  background: var(--card-bg);
+  transition: border-color 0.2s;
+}
+
+.moment-card.moment-all-done {
+  border-left-color: var(--success);
+  background: #f0fdf4;
+}
+
+.moment-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.moment-number {
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.moment-number.moment-number-done {
+  background: var(--success);
+}
+
+.moment-title-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.moment-icon {
+  font-size: 1.1rem;
+}
+
+.moment-title {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text);
+}
+
+.moment-time {
+  font-size: 0.85rem;
+  color: var(--primary-dark);
+  font-weight: 600;
+}
+
+.moment-badge {
+  flex-shrink: 0;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.step-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.step-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.step-item:last-child {
+  border-bottom: none;
+}
+
+.step-item input[type='checkbox'] {
+  margin-top: 0.25rem;
+  flex-shrink: 0;
+  accent-color: var(--success);
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+}
+
+.step-item label {
+  cursor: pointer;
+  line-height: 1.4;
+  font-size: 0.95rem;
+}
+
+.step-item.step-done label {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+/* ── /Planner ─────────────────────────────────────────── */
+
 @media print {
   .tab-nav,
   .btn,
