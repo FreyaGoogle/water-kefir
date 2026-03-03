@@ -40,9 +40,9 @@ const TIPS: Tip[] = [
       'Als je korrels (of rozijnen, vijgen) naar boven drijven en kleine belletjes bevatten, is de gisting actief. Korrels die zinken zijn niet per se slecht, maar drijvende korrels geven aan dat er genoeg CO₂ wordt geproduceerd.',
   },
   {
-    titel: 'Teveel korrels? Maak een backup',
+    titel: 'Teveel korrels? Geen probleem',
     tekst:
-      'Als je korrels groeien heb je op termijn meer dan je nodig hebt. Geef ze weg, stop ze in een smoothie, of maak een gedroogde backup voor als er iets misgaat. Droog ze 3-5 dagen op kamertemperatuur en bewaar ze in de koelkast.',
+      'Als je korrels groeien heb je op termijn meer dan je nodig hebt. Geef ze weg, stop ze in een smoothie, of maak een gedroogde backup voor als er iets misgaat. Droog ze 3-5 dagen op kamertemperatuur en bewaar ze in de koelkast. Wil je stoppen of heb je er simpelweg te veel? Kefirkorrels zijn volledig composteerbaar — gewoon op de composthoop of in de GFT-bak.',
   },
   {
     titel: 'Metaal vermijden',
